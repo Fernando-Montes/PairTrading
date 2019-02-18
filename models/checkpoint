@@ -1,0 +1,2 @@
+model_checkpoint_path: "LSTMClassification-best"
+all_model_checkpoint_paths: "LSTMClassification-best"

@@ -1,0 +1,1249 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Pairs Trading}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}332}]:} \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} autoreload
+          \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+          \PY{k+kn}{from} \PY{n+nn}{src}\PY{n+nn}{.}\PY{n+nn}{models}\PY{n+nn}{.}\PY{n+nn}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}} \PY{k}{import} \PY{o}{*}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The autoreload extension is already loaded. To reload it, use:
+  \%reload\_ext autoreload
+
+    \end{Verbatim}
+
+    \hypertarget{data-exploration}{%
+\section{Data exploration}\label{data-exploration}}
+
+Reading the file and having a first look at the data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}319}]:} \PY{n}{seriesFull} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/raw/pairs.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} 
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{seriesFull}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{firstLook}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+         DATE        ABC        XYZ     RATIO       DIFF
+0  2016-01-04  47.595426  73.253267  1.539082  25.657841
+1  2016-01-05  47.878171  73.851865  1.542496  25.973693
+2  2016-01-06  47.202725  72.730107  1.540803  25.527382
+3  2016-01-07  45.946080  70.774909  1.540391  24.828829
+4  2016-01-08  45.820415  70.615571  1.541138  24.795155
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_2_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    A rolling estimate of the mean and the mean +- its standard deviation
+are signals that can be used to decide when it might be a good time to
+enter or exit the market. Decided to use the ratio XYZ/ABC since the
+difference (XYZ-ABC) has a slope that would need to be subtracted if
+stationarity is used in any of the strategies.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{rollingEstimates}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{,} \PY{l+m+mi}{60}\PY{p}{)} \PY{c+c1}{\PYZsh{} Using a 60\PYZhy{}day rolling window}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Things to notice:}
+
+\begin{itemize}
+\item
+  The rolling Pearson's coefficient is close to 1 over the whole range
+  which indicates that the pair XYZ and ABC are truly correlated.
+\item
+  The scaled ratio is defined as the ratio XYZ/ABC divided by the
+  standard deviation of the rolling mean.
+\item
+  ``Recovery time'' of the scaled ratio once it exceeds 1-std (or even
+  2-std) is of the order of days.
+\end{itemize}
+
+    \hypertarget{modeling}{%
+\section{Modeling}\label{modeling}}
+
+The data from 2016-01-04 to 2017-08-21 was randomly separated between
+train (70\%) and validation data (30\%). The train data was used to
+optimize parameters of a given algorithm. The validation data was used
+to optimize hyper-parameters.
+
+The annualized rate of return (AR) was used as the metric to decide how
+good a strategy was. The AR was calculated by
+
+\[AR = 100 \times \left(\prod_{i=1}^{N}(1+r_i)^{256/N} - 1 \right),\]
+
+where \(r_i\) is the return of day \(i\) and \(N\) is the total number
+of days.
+
+A Monte Carlo (MC) simulation with 10000 iterations was used to quantify
+the expected AR and risk for each strategy. In each MC iteration, an AR
+was calculated by randomly selecting (with replacement) the daily
+returns on the unseen data from 2017-08-22 to 2018-05-02 (test data)
+after applying a given strategy. The mean and standard deviation of the
+AR distribution correspond to the mean expected APR and associated risk
+of the strategy, respectively.
+
+All transactions (buy or sell XYZ and ABC) are assumed to have no cost.
+
+\hypertarget{comment-about-the-code}{%
+\paragraph{Comment about the code:}\label{comment-about-the-code}}
+
+The machine learning algorithms used in this exercise are either native
+Scikit-Learn base estimator classes or have been written based on them.
+Two of the algorithms used (RNN and LSTM) used the tensorflow framework,
+and therefore two new classes, RNNClassifier and LSTMClassifier
+(Scikit-Learn compatible) were written. The multiple strategies were
+written using unique classes that rely heavily on parent inheritance.
+
+    \hypertarget{random-strategy}{%
+\subsection{Random strategy:}\label{random-strategy}}
+
+This strategy defines entry and exit points at random points in time. An
+entry point is where a pair strategy selection is made (either long ABC,
+short XYZ or short ABC, long XYZ). An exit point corresponds to a
+position that is neutral. The positions are hedged only at the entry
+points (\textbf{not} continuosly hedged if the position is maintained).
+This decision was made since it is likely than in a real scenario there
+would be a transaction cost per transaction.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}327}]:} \PY{n}{random\PYZus{}str} \PY{o}{=} \PY{n}{randomStrategy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{random\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}357}]:} \PY{n}{random\PYZus{}str}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)} 
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As expected the final return is close to zero. Since it is a random
+strategy it is useful to obtain the results of larger sample:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{random\PYZus{}str}\PY{o}{.}\PY{n}{histogram}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Even though this is not a valid strategy, the above result indicates
+that unless a strategy is biased towards negative returns, a
+non-continuous hedging strategy (randomly wrong) is not expected to
+generate a negative AR lower than \textasciitilde{}1\%.
+
+    \hypertarget{threshold-entry-and-exit-strategy}{%
+\subsection{Threshold entry and exit
+strategy:}\label{threshold-entry-and-exit-strategy}}
+
+This strategy defines entry and exit points based on how far the ratio
+XYZ/ABC is from its rolling mean. If the ratio is past a given entry
+threshold it is defined as an entry point. If the scaled ratio goes
+below a given exit threshold, it is defined as an exit point. The entry
+and exit thresholds, along with the rolling window range are
+hyper-parameters. The positions are hedged only at the entry points
+(\textbf{not} continuosly hedged).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{basic\PYZus{}str} \PY{o}{=} \PY{n}{basicStrategy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{basic\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} 50\PYZhy{}day rolling window, 1\PYZhy{}std entry point, }
+                                   \PY{c+c1}{\PYZsh{} back to the mean for exit point}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{basic\PYZus{}str}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The expected AR and associated risk of this strategy are:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} \PY{n}{basic\PYZus{}str}\PY{o}{.}\PY{n}{ARdistribution}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected AR is 7.42\% +- 2.55\% (1-sigma confidence)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The hyper-parameters of the strategy (window range for the rolling
+estimates, and entry and exits thresholds) were optimized used the full
+train data since there are no parameters:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{window} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{]}
+          \PY{n}{entry\PYZus{}threshold} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+          \PY{n}{exit\PYZus{}threshold} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.25}\PY{p}{]}
+          \PY{n}{results} \PY{o}{=} \PY{n}{basic\PYZus{}str}\PY{o}{.}\PY{n}{optimization}\PY{p}{(}\PY{n}{window}\PY{p}{,} \PY{n}{entry\PYZus{}threshold}\PY{p}{,} \PY{n}{exit\PYZus{}threshold}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Best parameters: window range: 5 - entry: 0.5 - exit: 0 - AR: 12.37\%
+
+    \end{Verbatim}
+
+    The best hyper-parameters are a 5-day rolling window, a 0.5 standard
+deviation entry threshold and an exit threshold of zero (when the scaled
+ratio goes back to the mean). The expected AR and risk of the strategy
+using the optmized hyper-parameters are:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{n}{basic\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} Best result based on the train data }
+          \PY{n}{basic\PYZus{}str}\PY{o}{.}\PY{n}{ARdistribution}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected AR is 7.46\% +- 2.58\% (1-sigma confidence)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It is also instructive to understand the predictive power of the
+strategy (since this strategy does not have parameters but
+hyper-parameters) by plotting the AR of the train and test data for all
+the hyper-parameters studied:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{plotAR}\PY{p}{(}\PY{n}{results}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    There is a correlation between the train and test data which indicates
+the strategy results on the train data have some predictive power over
+the strategy results on test data.
+
+    \hypertarget{rnn-ratio-predicting-strategy}{%
+\subsection{RNN ratio predicting
+strategy:}\label{rnn-ratio-predicting-strategy}}
+
+This strategy defines entry and exit points based on Recurrent Neural
+Network (RNN) predictions on how the ratio XYZ/ABC will move next.
+
+    \hypertarget{recurrent-neural-network-rnn}{%
+\subsubsection{Recurrent Neural Network
+(RNN)}\label{recurrent-neural-network-rnn}}
+
+The RNN regression algorithm was trained to fit the ratio (XYZ/ABC)/std.
+Since the dataset is not very large, The RNN will consist of only
+1-layer. The number of neurons and the number of sequences are
+hyper-parameters to be optimized.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}531}]:} \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{seriesFull}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{]}
+          \PY{n}{validation\PYZus{}data} \PY{o}{=} \PY{n}{seriesFull}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{:}\PY{p}{]}
+          
+          \PY{n}{rnn} \PY{o}{=} \PY{n}{RNNRegression}\PY{p}{(}\PY{n}{n\PYZus{}neurons}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{fit\PYZus{}range}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} 
+                              \PY{n}{rolling\PYZus{}window}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{rnn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration 0 - model RMSE:1.11244 - best RMSE:1.11244
+Iteration 200 - model RMSE:0.95273 - best RMSE:0.95273
+Iteration 400 - model RMSE:0.94645 - best RMSE:0.94645
+Iteration 600 - model RMSE:0.92527 - best RMSE:0.92527
+Iteration 800 - model RMSE:0.91341 - best RMSE:0.91341
+Iteration 1000 - model RMSE:0.89867 - best RMSE:0.89867
+Iteration 1200 - model RMSE:0.89090 - best RMSE:0.89090
+Iteration 1400 - model RMSE:0.87839 - best RMSE:0.87839
+Iteration 1600 - model RMSE:0.85764 - best RMSE:0.85764
+Iteration 1800 - model RMSE:0.83656 - best RMSE:0.83656
+Iteration 2000 - model RMSE:0.82123 - best RMSE:0.82123
+Iteration 2200 - model RMSE:0.81498 - best RMSE:0.81498
+Iteration 2400 - model RMSE:0.81322 - best RMSE:0.81322
+Iteration 2600 - model RMSE:0.81216 - best RMSE:0.81216
+Iteration 2800 - model RMSE:0.81330 - best RMSE:0.81216
+Iteration 3000 - model RMSE:0.81279 - best RMSE:0.81216
+Iteration 3200 - model RMSE:0.81317 - best RMSE:0.81216
+Iteration 3400 - model RMSE:0.81390 - best RMSE:0.81216
+Early stopping!
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}531}]:} RNNRegression(activation=<function elu at 0x133f13ae8>, fit\_range=50,
+                 learning\_rate=0.001, n\_neurons=10,
+                 optimizer\_class=<class 'tensorflow.python.training.adam.AdamOptimizer'>,
+                 rolling\_window=10)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}532}]:} \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{rnn}\PY{o}{.}\PY{n}{rolling\PYZus{}estimate}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{)}
+          \PY{n}{plot\PYZus{}ratioFitting}\PY{p}{(}\PY{n}{results}\PY{o}{=}\PY{n}{train\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}533}]:} \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{rnn}\PY{o}{.}\PY{n}{rolling\PYZus{}estimate}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)}
+          \PY{n}{plot\PYZus{}ratioFitting}\PY{p}{(}\PY{n}{results}\PY{o}{=}\PY{n}{test\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Fitting the ratio/std curve does not work that well. Even the overfitted
+train data is not really a good fit since the fit is ``shifted'' by one
+unit. This is therefore not a good strategy and it was abandoned.
+
+    \hypertarget{position-classification-rnn-strategy}{%
+\subsection{Position classification RNN
+strategy:}\label{position-classification-rnn-strategy}}
+
+This strategy defines entry and exit points based on a classification
+RNN algorithm trained to predict the position (either long ABC, short
+XYZ or short ABC, long XYZ) that result in the best profits.
+
+First, we need to identify the best positions (looking at the future) in
+order to know how to train the network (find the labels).
+
+Following the threshold entry and exit strategy, we identified all entry
+points for which ABC goes up and XYZ goes down or viceversa. Exit points
+are all other days that are not entry points. Before training the RNN,
+we can see how well this ``perfect'' strategy works:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}358}]:} \PY{n}{bestPairs\PYZus{}str} \PY{o}{=} \PY{n}{bestPairsStrategy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{bestPairs\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{p}{)}
+          \PY{n}{bestPairs\PYZus{}str}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{bestPairs\PYZus{}str}\PY{o}{.}\PY{n}{ARdistribution}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected AR is 2.66\% +- 0.94\% (1-sigma confidence)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_32_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The expected AR of this strategy is actually worse than the best result
+using the threshold entry and exit strategy. Although, this result may
+seem counter intuitive there are two reasons for this:
+
+\begin{itemize}
+\item
+  There are some situations in which the hedging does not fully work
+  (since the ratio XYZ/ABC has a downward tendency) and therefore being
+  long on ABC and short on XYZ (instead of neutral) is actually better
+  in the long term.
+\item
+  More importantly, if the rolling mean of the ratio XYZ/ABC jumps up,
+  it does not mean necessarily that XYZ will move down and ABC will move
+  up. It could also be that only one of them moves in the ``right''
+  direction while the other one stays close to neutral. In that case
+  keeping the previous position will still net a positive daily return.
+  Since the threshold entry and exit strategy stays in the previous
+  position until an exit signal is triggered, the threshold basic
+  strategy benefits from this.
+\end{itemize}
+
+Based on the above observations, we can simply find the best possible
+position every day (again looking into the future) in a pair trading
+strategy regardless of how the individual components (ABC or XYZ) move.
+The position that nets a positive return the next day is selected for
+that day. This strategy will result in the best possible return with the
+given test data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}359}]:} \PY{n}{bestPositions\PYZus{}str} \PY{o}{=} \PY{n}{bestPositionsStrategy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{bestPositions\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{p}{)}
+          \PY{n}{bestPositions\PYZus{}str}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{bestPositions\PYZus{}str}\PY{o}{.}\PY{n}{ARdistribution}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected AR is 23.88\% +- 2.47\% (1-sigma confidence)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_34_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The best possible AR on the test data using a pair strategy is 23.9\%.
+This AR corresponds to the ceiling of what is possible in a pair
+traiding strategy. These positions are defined as the ideal positions
+and will be used as the labels to train all remaining algorithms.
+
+Now that the target labels (best positions) have been defined, we can
+train an RNN algorithm using a single layer. The input data will be XYZ,
+ABC, DIFF and RATIO. The sequence length will be a hyper-parameter. The
+algorithm is trained with the first 70\% of the data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1124}]:} \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{seriesFull}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{]}
+           \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{bestPositions}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{)}
+           \PY{n}{rnnCl} \PY{o}{=} \PY{n}{RNNClassification}\PY{p}{(}\PY{n}{n\PYZus{}neurons}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{fit\PYZus{}range}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+           \PY{n}{rnnCl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{max\PYZus{}iterations}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter 0 - model acc\_train:0.5224 - model acc\_validation:0.4522 - best acc\_validation:0.4522
+Iter 0 - model acc\_train:0.5224 - model acc\_validation:0.4522 - best acc\_validation:0.4522
+Iter 22 - model acc\_train:0.5224 - model acc\_validation:0.4609 - best acc\_validation:0.4609
+Iter 24 - model acc\_train:0.4776 - model acc\_validation:0.4870 - best acc\_validation:0.4870
+Iter 25 - model acc\_train:0.4776 - model acc\_validation:0.5130 - best acc\_validation:0.5130
+Iter 26 - model acc\_train:0.4776 - model acc\_validation:0.5478 - best acc\_validation:0.5478
+Iter 500 - model acc\_train:0.5597 - model acc\_validation:0.5217 - best acc\_validation:0.5478
+Iter 727 - model acc\_train:0.5709 - model acc\_validation:0.5565 - best acc\_validation:0.5565
+Iter 730 - model acc\_train:0.5224 - model acc\_validation:0.5652 - best acc\_validation:0.5652
+Iter 739 - model acc\_train:0.5634 - model acc\_validation:0.6000 - best acc\_validation:0.6000
+Iter 740 - model acc\_train:0.5448 - model acc\_validation:0.6261 - best acc\_validation:0.6261
+Iter 1000 - model acc\_train:0.5896 - model acc\_validation:0.5130 - best acc\_validation:0.6261
+Iter 1014 - model acc\_train:0.5821 - model acc\_validation:0.6348 - best acc\_validation:0.6348
+Iter 1189 - model acc\_train:0.6045 - model acc\_validation:0.6435 - best acc\_validation:0.6435
+Iter 1500 - model acc\_train:0.5373 - model acc\_validation:0.5304 - best acc\_validation:0.6435
+Iter 2000 - model acc\_train:0.6157 - model acc\_validation:0.5826 - best acc\_validation:0.6435
+Iter 2500 - model acc\_train:0.6493 - model acc\_validation:0.5913 - best acc\_validation:0.6435
+Iter 2736 - model acc\_train:0.6493 - model acc\_validation:0.6609 - best acc\_validation:0.6609
+Iter 3000 - model acc\_train:0.6716 - model acc\_validation:0.5652 - best acc\_validation:0.6609
+Iter 3500 - model acc\_train:0.7276 - model acc\_validation:0.5652 - best acc\_validation:0.6609
+Iter 4000 - model acc\_train:0.7463 - model acc\_validation:0.6000 - best acc\_validation:0.6609
+Iter 4500 - model acc\_train:0.7575 - model acc\_validation:0.6087 - best acc\_validation:0.6609
+Iter 5000 - model acc\_train:0.7425 - model acc\_validation:0.6435 - best acc\_validation:0.6609
+Iter 5500 - model acc\_train:0.7351 - model acc\_validation:0.6261 - best acc\_validation:0.6609
+Iter 5800 - model acc\_train:0.7239 - model acc\_validation:0.6696 - best acc\_validation:0.6696
+Iter 6000 - model acc\_train:0.7164 - model acc\_validation:0.6348 - best acc\_validation:0.6696
+Iter 6500 - model acc\_train:0.7313 - model acc\_validation:0.6087 - best acc\_validation:0.6696
+Iter 7000 - model acc\_train:0.7276 - model acc\_validation:0.6174 - best acc\_validation:0.6696
+Iter 7500 - model acc\_train:0.7164 - model acc\_validation:0.6174 - best acc\_validation:0.6696
+Iter 8000 - model acc\_train:0.7239 - model acc\_validation:0.5913 - best acc\_validation:0.6696
+Iter 8500 - model acc\_train:0.7276 - model acc\_validation:0.6435 - best acc\_validation:0.6696
+Iter 9000 - model acc\_train:0.7201 - model acc\_validation:0.6087 - best acc\_validation:0.6696
+Iter 9500 - model acc\_train:0.7276 - model acc\_validation:0.6174 - best acc\_validation:0.6696
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1124}]:} RNNClassification(fit\_range=20, learning\_rate=0.001, n\_neurons=20,
+                    optimizer\_class=<class 'tensorflow.python.training.adam.AdamOptimizer'>)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1125}]:} \PY{c+c1}{\PYZsh{}rnnCl.save(\PYZdq{}../models/RNNClassification\PYZhy{}best\PYZdq{})}
+\end{Verbatim}
+
+    Hyper-parameter optimization can be also be done:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1077}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{RandomizedSearchCV}
+           
+           \PY{n}{param\PYZus{}distribs} \PY{o}{=} \PY{p}{\PYZob{}}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}neurons}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fit\PYZus{}range}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{]}\PY{p}{,}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{]}
+           \PY{p}{\PYZcb{}}
+           
+           \PY{n}{rnd\PYZus{}search} \PY{o}{=} \PY{n}{RandomizedSearchCV}\PY{p}{(}\PY{n}{RNNClassification}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{param\PYZus{}distribs}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{24}\PY{p}{,}
+                                           \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} 
+                                           \PY{n}{iid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+           \PY{n}{rnd\PYZus{}search}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{max\PYZus{}iterations}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting 3 folds for each of 24 candidates, totalling 72 fits
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[Parallel(n\_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n\_jobs=-1)]: Done  25 tasks      | elapsed:  6.9min
+[Parallel(n\_jobs=-1)]: Done  72 out of  72 | elapsed: 24.0min finished
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter 0 - model acc\_train:0.5018 - model acc\_validation:0.4661 - best acc\_validation:0.4661
+Iter 0 - model acc\_train:0.5018 - model acc\_validation:0.4661 - best acc\_validation:0.4661
+Iter 9 - model acc\_train:0.5018 - model acc\_validation:0.4831 - best acc\_validation:0.4831
+Iter 10 - model acc\_train:0.5091 - model acc\_validation:0.5000 - best acc\_validation:0.5000
+Iter 11 - model acc\_train:0.5055 - model acc\_validation:0.5339 - best acc\_validation:0.5339
+Iter 33 - model acc\_train:0.5091 - model acc\_validation:0.5508 - best acc\_validation:0.5508
+Iter 61 - model acc\_train:0.5091 - model acc\_validation:0.5593 - best acc\_validation:0.5593
+Iter 118 - model acc\_train:0.5673 - model acc\_validation:0.5678 - best acc\_validation:0.5678
+Iter 500 - model acc\_train:0.5927 - model acc\_validation:0.4831 - best acc\_validation:0.5678
+Iter 1000 - model acc\_train:0.6218 - model acc\_validation:0.4831 - best acc\_validation:0.5678
+Iter 1340 - model acc\_train:0.6145 - model acc\_validation:0.6695 - best acc\_validation:0.6695
+Iter 1500 - model acc\_train:0.6327 - model acc\_validation:0.5085 - best acc\_validation:0.6695
+Iter 2000 - model acc\_train:0.6218 - model acc\_validation:0.5085 - best acc\_validation:0.6695
+Iter 2500 - model acc\_train:0.6545 - model acc\_validation:0.5424 - best acc\_validation:0.6695
+Iter 3000 - model acc\_train:0.6691 - model acc\_validation:0.5847 - best acc\_validation:0.6695
+Iter 3500 - model acc\_train:0.7127 - model acc\_validation:0.5424 - best acc\_validation:0.6695
+Iter 4000 - model acc\_train:0.7200 - model acc\_validation:0.4746 - best acc\_validation:0.6695
+Iter 4500 - model acc\_train:0.7455 - model acc\_validation:0.4915 - best acc\_validation:0.6695
+Iter 5000 - model acc\_train:0.7636 - model acc\_validation:0.4915 - best acc\_validation:0.6695
+Iter 5500 - model acc\_train:0.7636 - model acc\_validation:0.4915 - best acc\_validation:0.6695
+Iter 6000 - model acc\_train:0.7745 - model acc\_validation:0.5000 - best acc\_validation:0.6695
+Iter 6500 - model acc\_train:0.6982 - model acc\_validation:0.4915 - best acc\_validation:0.6695
+Iter 7000 - model acc\_train:0.7564 - model acc\_validation:0.5169 - best acc\_validation:0.6695
+Iter 7298 - model acc\_train:0.5600 - model acc\_validation:0.6864 - best acc\_validation:0.6864
+Iter 7304 - model acc\_train:0.5709 - model acc\_validation:0.7034 - best acc\_validation:0.7034
+Iter 7500 - model acc\_train:0.6145 - model acc\_validation:0.6271 - best acc\_validation:0.7034
+Iter 8000 - model acc\_train:0.6582 - model acc\_validation:0.5678 - best acc\_validation:0.7034
+Iter 8500 - model acc\_train:0.6800 - model acc\_validation:0.6186 - best acc\_validation:0.7034
+Iter 9000 - model acc\_train:0.6909 - model acc\_validation:0.6271 - best acc\_validation:0.7034
+Iter 9500 - model acc\_train:0.7273 - model acc\_validation:0.6525 - best acc\_validation:0.7034
+Iter 9523 - model acc\_train:0.5818 - model acc\_validation:0.7119 - best acc\_validation:0.7119
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1077}]:} RandomizedSearchCV(cv=3, error\_score='raise-deprecating',
+                     estimator=RNNClassification(fit\_range=50, learning\_rate=0.01, n\_neurons=10,
+                    optimizer\_class=<class 'tensorflow.python.training.adam.AdamOptimizer'>),
+                     fit\_params=None, iid=False, n\_iter=24, n\_jobs=-1,
+                     param\_distributions=\{'n\_neurons': [10, 20, 30, 50], 'fit\_range': [5, 10, 20], 'learning\_rate': [0.001, 0.01]\},
+                     pre\_dispatch='2*n\_jobs', random\_state=42, refit=True,
+                     return\_train\_score='warn', scoring=None, verbose=2)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1078}]:} \PY{n}{rnd\PYZus{}search}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1078}]:} \{'n\_neurons': 50, 'learning\_rate': 0.001, 'fit\_range': 10\}
+\end{Verbatim}
+            
+    An strategy following the positions calculated by the trained RNN
+algorithm results in:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}360}]:} \PY{n}{RNNCl\PYZus{}str} \PY{o}{=} \PY{n}{RNNClStrategy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{RNNCl\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{n}{RNNCl\PYZus{}str}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{RNNCl\PYZus{}str}\PY{o}{.}\PY{n}{ARdistribution}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ../models/RNNClassification-best
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected AR is 10.45\% +- 2.74\% (1-sigma confidence)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_42_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This method can certainly benefit from more data. The number of neurons
+in the single layer is low because the algorithm overfits the training
+data otherwise. The best result of the grid search was not used at the
+end because of the problem of overfitting. It is worth to point out that
+it is better to have a position than to be neutral in a given day. Since
+the RNN classifier uses a softmax classifier, the probabilities of
+belonging to a given position can be used to define either an entry
+point or to remain neutral (by using a threshold). Raising the threshold
+above asimple majority decreases the AR.
+
+    \hypertarget{position-classification-lstm-strategy}{%
+\subsection{Position classification LSTM
+strategy:}\label{position-classification-lstm-strategy}}
+
+This strategy defines entry and exit points based on a classification
+LSTM algorithm trained to predict the position that results in the best
+profits. The LSTM is trained using a single layer. The input data
+consists of XYZ, ABC, DIFF and RATIO. The sequence length is be a
+hyper-parameter. The algorithm is trained with the first 70\% of the
+data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1135}]:} \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{seriesFull}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{]}
+           \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{bestPositions}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{)}
+           \PY{n}{lstmCl} \PY{o}{=} \PY{n}{LSTMClassification}\PY{p}{(}\PY{n}{n\PYZus{}neurons}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{fit\PYZus{}range}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+           \PY{n}{lstmCl}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{max\PYZus{}iterations}\PY{o}{=}\PY{l+m+mi}{5000}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iter 0 - model acc\_train:0.4776 - model acc\_validation:0.5478 - best acc\_validation:0.5478
+Iter 0 - model acc\_train:0.4776 - model acc\_validation:0.5478 - best acc\_validation:0.5478
+Iter 500 - model acc\_train:0.4776 - model acc\_validation:0.5478 - best acc\_validation:0.5478
+Iter 1000 - model acc\_train:0.5224 - model acc\_validation:0.4522 - best acc\_validation:0.5478
+Iter 1500 - model acc\_train:0.5224 - model acc\_validation:0.4522 - best acc\_validation:0.5478
+Iter 1926 - model acc\_train:0.5522 - model acc\_validation:0.5565 - best acc\_validation:0.5565
+Iter 1930 - model acc\_train:0.5522 - model acc\_validation:0.5739 - best acc\_validation:0.5739
+Iter 2000 - model acc\_train:0.5560 - model acc\_validation:0.5391 - best acc\_validation:0.5739
+Iter 2167 - model acc\_train:0.5784 - model acc\_validation:0.5913 - best acc\_validation:0.5913
+Iter 2242 - model acc\_train:0.5896 - model acc\_validation:0.6087 - best acc\_validation:0.6087
+Iter 2262 - model acc\_train:0.5933 - model acc\_validation:0.6174 - best acc\_validation:0.6174
+Iter 2265 - model acc\_train:0.5933 - model acc\_validation:0.6261 - best acc\_validation:0.6261
+Iter 2268 - model acc\_train:0.5933 - model acc\_validation:0.6348 - best acc\_validation:0.6348
+Iter 2408 - model acc\_train:0.6082 - model acc\_validation:0.6522 - best acc\_validation:0.6522
+Iter 2499 - model acc\_train:0.6604 - model acc\_validation:0.6696 - best acc\_validation:0.6696
+Iter 2500 - model acc\_train:0.6418 - model acc\_validation:0.6261 - best acc\_validation:0.6696
+Iter 2512 - model acc\_train:0.6530 - model acc\_validation:0.6783 - best acc\_validation:0.6783
+Iter 2622 - model acc\_train:0.6604 - model acc\_validation:0.6870 - best acc\_validation:0.6870
+Iter 2657 - model acc\_train:0.6791 - model acc\_validation:0.6957 - best acc\_validation:0.6957
+Iter 2802 - model acc\_train:0.6903 - model acc\_validation:0.7043 - best acc\_validation:0.7043
+Iter 3000 - model acc\_train:0.6828 - model acc\_validation:0.6957 - best acc\_validation:0.7043
+Iter 3394 - model acc\_train:0.6866 - model acc\_validation:0.7130 - best acc\_validation:0.7130
+Iter 3396 - model acc\_train:0.6903 - model acc\_validation:0.7217 - best acc\_validation:0.7217
+Iter 3500 - model acc\_train:0.6903 - model acc\_validation:0.6783 - best acc\_validation:0.7217
+Iter 4000 - model acc\_train:0.7090 - model acc\_validation:0.6870 - best acc\_validation:0.7217
+Iter 4500 - model acc\_train:0.7090 - model acc\_validation:0.6696 - best acc\_validation:0.7217
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1135}]:} LSTMClassification(fit\_range=20, learning\_rate=0.001, n\_layers=None,
+                     n\_neurons=5,
+                     optimizer\_class=<class 'tensorflow.python.training.adam.AdamOptimizer'>)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1136}]:} \PY{c+c1}{\PYZsh{}lstmCl.save(\PYZdq{}../models/LSTMClassification\PYZhy{}best\PYZdq{})}
+\end{Verbatim}
+
+    The strategy that uses the positions predicted by the trained LSTM
+algorithm is:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}362}]:} \PY{n}{LSTMCl\PYZus{}str} \PY{o}{=} \PY{n}{LSTMClStrategy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{LSTMCl\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{threshold} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{n}{LSTMCl\PYZus{}str}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{LSTMCl\PYZus{}str}\PY{o}{.}\PY{n}{ARdistribution}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ../models/LSTMClassification-best
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected AR is 8.24\% +- 2.67\% (1-sigma confidence)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_48_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This method will certainly benefit from more data as well. The number of
+neurons in the single layer is already low (5 neurons) because the
+algorithm overfits the training data otherwise. As with the RNN
+strategy, it is better to have a position than be neutral. Raising the
+threshold above simple majority in the softmax probabilities decreases
+the test data AR.
+
+    \hypertarget{position-classification-by-a-combination-of-logistic-regression-random-forest-and-k-neighbors-strategy}{%
+\subsection{Position classification by a combination of logistic
+regression, random forest and K-neighbors
+strategy:}\label{position-classification-by-a-combination-of-logistic-regression-random-forest-and-k-neighbors-strategy}}
+
+This strategy defines entry and exit points based on a hard voting
+classifier ensemble of random forest, logistic regression and k-neighbor
+algorithms trained to predict the position that results in the best
+profits. The input data is XYZ, ABC, DIFF and RATIO given over a set
+number of days. The number of days is a hyper-parameter that has been
+optimized. Hyper-parameters in each model were also optimized.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}159}]:} \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{seriesFull}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{]}
+          \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{bestPositions}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{)}
+          \PY{n}{fit\PYZus{}data} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} Number of days}
+          \PY{n}{classif} \PY{o}{=} \PY{n}{trainClassification}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{fit\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Model LogisticRegression - acc. train set: 0.6983 - acc. validation set: 0.6465
+ Model RandomForestClassifier - acc. train set: 0.7864 - acc. validation set: 0.6061
+ Model KNeighborsClassifier - acc. train set: 0.6271 - acc. validation set: 0.4848
+ Model VotingClassifier - acc. train set: 0.7729 - acc. validation set: 0.6364
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}363}]:} \PY{n}{Classif\PYZus{}str} \PY{o}{=} \PY{n}{classifStrategy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{Classif\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{classif}\PY{p}{)}
+          \PY{n}{Classif\PYZus{}str}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{Classif\PYZus{}str}\PY{o}{.}\PY{n}{ARdistribution}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected AR is 6.98\% +- 2.71\% (1-sigma confidence)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_52_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This method will certainly benefit from more data as well. Some of the
+hyper-parameters in the random forest method are pretty low (max\_depth
+= 3, min\_samples\_leaf = 15) already. The K-neighbor hyper-parameters
+were optimized but did not make much difference in terms of improvement.
+Algorithms SVC and Gaussian Processes classifier were also used but
+their results were significantly worse than the algorithms selected.
+
+    \hypertarget{ensemble-strategy}{%
+\subsection{Ensemble strategy:}\label{ensemble-strategy}}
+
+An strategy that combines the optimized strategies discussed earlier
+into a hard voting ensemble were studied. Different combinations of the
+threshold entry and exit, random forest, logistic regression, RNN and
+LSTM strategies into the ensemble were studied. If there is a tie, a
+position long on ABC and short on XYZ was chosen since it is better than
+to be neutral.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{n}{all\PYZus{}data} \PY{o}{=} \PY{n}{bestPositions}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}
+          \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{all\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{n+nb}{len}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{]}
+          \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{all\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{all\PYZus{}data}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.7}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+    All the methods in the ensemble have already been trained (using only
+the first 70\% of the data) and are saved to disk. In case they need to
+be trained again the following method can be used. The RNN and LSTM
+algorithms take longer to train and therefore they are optional (the
+saving option is also disabled for now).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{n}{trainModelsEnsemble}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{fit\PYZus{}RNN} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{fit\PYZus{}LSTM} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+    The accuracy between the ideal pair strategy positions and predicted
+positions for the different algorithms in unseen data is the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{checkAccuracy}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{ensemblePositions}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ../models/RNNClassification-best
+INFO:tensorflow:Restoring parameters from ../models/LSTMClassification-best
+LogisticRegression accuracy: 0.5882352941176471
+RandomForest accuracy: 0.6143790849673203
+RNN accuracy: 0.6405228758169934
+LSTM accuracy: 0.6470588235294118
+BasicStrategy accuracy: 0.5098039215686274
+Ensemble accuracy: 0.5816993464052288
+IdealPosition accuracy: 1.0
+
+    \end{Verbatim}
+
+    Based on the accuracy selecting the positions, the best algorithms are
+RNN and LSTM. The following methods define and apply the strategy. The
+apply method has the option of selecting the algorithm of choice between
+\emph{BasicStrategy} (threshold entry and exit), \emph{RandomForest},
+\emph{LogisticRegression}, \emph{RNN}, \emph{LSTM} and \emph{Ensemble}.
+Using only the RNN and LSTM algorithms in the ensemble strategy results
+in:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}364}]:} \PY{n}{ensemble\PYZus{}str} \PY{o}{=} \PY{n}{ensembleStrategy}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}
+          \PY{n}{ensemble\PYZus{}str}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{model} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ensemble}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ensemble\PYZus{}str}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)} 
+          \PY{n}{ensemble\PYZus{}str}\PY{o}{.}\PY{n}{ARdistribution}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ../models/RNNClassification-best
+INFO:tensorflow:Restoring parameters from ../models/LSTMClassification-best
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_61_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Expected AR is 10.82\% +- 2.72\% (1-sigma confidence)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_61_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{summary}{%
+\subsection{Summary:}\label{summary}}
+
+The expected AR and risk (defined as the AR 1-sigma confidence) for the
+different strategies considered here are shown:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{n}{summary}\PY{p}{(}\PY{n}{ensemble\PYZus{}str}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ../models/RNNClassification-best
+INFO:tensorflow:Restoring parameters from ../models/LSTMClassification-best
+INFO:tensorflow:Restoring parameters from ../models/RNNClassification-best
+INFO:tensorflow:Restoring parameters from ../models/LSTMClassification-best
+INFO:tensorflow:Restoring parameters from ../models/RNNClassification-best
+INFO:tensorflow:Restoring parameters from ../models/LSTMClassification-best
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    A hard voting ensemble considering only the RNN and LSTM strategies is
+slightly better than other strategies. The uncertainty in the predicted
+AR (or risk) is due to the limited number of days in the test data set
+and it only represents the \emph{statistical} uncertainty. The
+associated risk does not include the uncertainty due to changes in the
+behavior of the ABC and XYZ which may be significant if the algorithms
+are not trained to capture such a change. It is recommended that if the
+correlated behavior of ABC and XYZ is expected to change over a time
+period of \emph{N} number of days, the algorithms be trained in a
+shorter time scale. In the case considered here, the training of the
+algorithms can be done every few weeks.
+
+\hypertarget{comment-about-the-code}{%
+\paragraph{Comment about the code:}\label{comment-about-the-code}}
+
+Running of the preferred trained model to obtain a new prediction is
+rather simple:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seriesFull }\OperatorTok{=}\NormalTok{ pd.read_csv(}\StringTok{'../data/raw/pairs.csv'}\NormalTok{, header}\OperatorTok{=}\DecValTok{0}\NormalTok{) }
+\NormalTok{ensemble_str }\OperatorTok{=}\NormalTok{ ensembleStrategy(seriesFull)}
+\NormalTok{ensemble_str.}\BuiltInTok{apply}\NormalTok{(model }\OperatorTok{=} \StringTok{'Ensemble'}\NormalTok{)}
+\NormalTok{ensemble_str.}\BuiltInTok{print}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+The final row will have the predicted position (1 for long ABC, short
+XYZ and -1 for short ABC, long ABC).
+
+To train the models, the code is simply:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainModelsEnsemble(train_data, fit_RNN }\OperatorTok{=} \VariableTok{True}\NormalTok{, fit_LSTM }\OperatorTok{=} \VariableTok{True}\NormalTok{) }
+            \CommentTok{# train_data has the same format as pairs.csv}
+\end{Highlighting}
+\end{Shaded}
+
+    \hypertarget{capital-allocation}{%
+\section{Capital allocation}\label{capital-allocation}}
+
+As discussed earlier, the best investment strategy uses the fact that it
+is better to pick a position than to be neutral in the long term. As
+such, one expects that the best capital allocation strategy will also
+require to invest all initial capital at the earliest opportunity. This
+capital allocation strategy was verified by a Monte Carlo simulation
+were the \$10 million were allocated daily in equal amounts until all
+the money had been invested. The investment portafolio after 1 year as a
+function of days to allocate is shown bellow:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}322}]:} \PY{n}{constantAllocationPlot}\PY{p}{(}\PY{n}{seriesFull}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:tensorflow:Restoring parameters from ../models/RNNClassification-best
+INFO:tensorflow:Restoring parameters from ../models/LSTMClassification-best
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Pairs Trading_files/Pairs Trading_66_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{scaling}{%
+\section{Scaling}\label{scaling}}
+
+The final code is not ready for production. It is not prepared for
+version control nor for parallelization either by Multithreading or
+Multiprocessing (except by using the Scikit-Learn RandomizedSearchCV
+parallelization option or by native sklearn algorithms). The code could
+be made faster by creating vectorized functions, by using the python
+multiprocessing library (for example when searching the best
+hyper-parameters of the models) and by distributing TensorFlow
+computations among several CPUs or GPUs using the distributed tensorflow
+framework. If the same model needs to be applied in sequence (for
+example if the same strategy is to be used in several times per second)
+TensorFlow Queues may be advantageous and could be implemented.
+
+Assuming access to a large cloud provider like Google Cloud Platform,
+AWS, Azure Machine Learning Studio or Kubeflow, it may possible to use
+distributed analytic frameworks such as Hadoop MapReduce. In this
+particular pair strategy scenario, a combination of TensorFlow Serving
+and Kubernetes can be used to deploy as a web server to communicate with
+a python script by a REST API. In the case of several thousands of
+strategies being deployed simultaneously it would be relatively easy to
+parallelize a pipeline of importing data from an SQL database, running
+the trained model and exporting the results back to the database. I
+would recommend offline learning for the pair strategy implementation.
+How often the models will need to be trained will need to be tested. I
+would recommend to initially train them once per week and if possible
+once per day and adjust as necessary. Model version control can be done
+by storing the trained model in the cloud server like Amazon S3 and all
+the reproducible codes in Git. An alternative may be to use a DVC
+system.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
